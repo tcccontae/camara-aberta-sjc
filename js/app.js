@@ -5,8 +5,10 @@ import { telaInicio } from "./telas/inicio.js";
 import { telaGraficos } from "./telas/graficos.js";
 import { telaGabinetes } from "./telas/gabinetes.js";
 import { telaDetalhe } from "./telas/detalhe.js";
+import { EXPLICACOES } from "./explicacoes.js";
 
 const conteudo = document.getElementById("conteudo");
+const janelaAjuda = document.getElementById("janela-ajuda");
 
 // Cada tela é um objeto com:
 //   html(dados, parametro)      → devolve o HTML da tela
@@ -36,6 +38,24 @@ function mostrarTela(dados) {
   window.lucide?.createIcons(); // troca os <i data-lucide> pelos desenhos SVG
   window.scrollTo(0, 0);
 }
+
+// ===== Janela de ajuda (botões "?") =====
+// Um único "ouvinte" no documento todo: funciona também para botões criados
+// depois, quando a tela muda (isso se chama delegação de eventos).
+document.addEventListener("click", (evento) => {
+  const botao = evento.target.closest("[data-ajuda]");
+  if (!botao) return;
+  const explicacao = EXPLICACOES[botao.dataset.ajuda];
+  if (!explicacao) return;
+  document.getElementById("ajuda-titulo").textContent = explicacao.titulo;
+  document.getElementById("ajuda-texto").innerHTML = explicacao.texto;
+  janelaAjuda.showModal(); // abre por cima de tudo; Esc fecha
+});
+
+janelaAjuda.addEventListener("click", (evento) => {
+  // fecha no botão "Fechar"/"Entendi" ou ao tocar fora da caixa (no fundo escuro)
+  if (evento.target.closest(".fechar") || evento.target === janelaAjuda) janelaAjuda.close();
+});
 
 async function iniciar() {
   try {

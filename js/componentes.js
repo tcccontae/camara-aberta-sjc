@@ -13,6 +13,13 @@ export function avatar(nome, grande = false) {
   return `<span class="avatar${grande ? " avatar-grande" : ""}" aria-hidden="true">${escapar(iniciais(nome))}</span>`;
 }
 
+// ===== Botão de ajuda (?) — o texto fica em explicacoes.js =====
+
+export function ajuda(id, pergunta) {
+  return `<button class="ajuda" type="button" data-ajuda="${id}" aria-label="${escapar(pergunta)}">
+    <i data-lucide="circle-help" aria-hidden="true"></i></button>`;
+}
+
 // ===== Barras por categoria (ícone, nome, valor e fatia) =====
 
 export function listaCategorias(itens) {
@@ -51,7 +58,8 @@ export function blocoMeses(meses, descricao) {
       <th scope="row">${nomeMes(m.mes)}</th><td>${moeda(m.total)}</td>
     </tr>`).join("");
   const nota13 = maisCaro.mes.endsWith("-12")
-    ? " Em dezembro é pago o 13º salário, por isso a conta de pessoal quase dobra."
+    ? ` Em dezembro é pago o 13º salário, por isso a conta de pessoal quase dobra.
+       ${ajuda("decimo-terceiro", "Por que dezembro custa mais?")}`
     : "";
 
   return `

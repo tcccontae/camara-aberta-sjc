@@ -344,11 +344,86 @@ tr.mais-caro { background: #FBF1D6; font-weight: 700; }
   white-space: nowrap;
 }
 .comparacao { display: flex; gap: 8px; align-items: center; margin: 0; }
-.comparacao svg { flex: none; color: var(--dourado); }
+.comparacao > svg { flex: none; color: var(--dourado); } /* só o ícone de tendência */
+
+/* ===== Botão de ajuda (?) e janela de explicação ===== */
+.ajuda {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;               /* área de toque mínima recomendada */
+  height: 44px;
+  margin: -10px -8px;        /* não aumenta a altura da linha */
+  vertical-align: middle;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--marinho);
+  cursor: pointer;
+}
+.ajuda svg { width: 20px; height: 20px; }
+.ajuda:hover { background: rgba(31, 42, 68, 0.08); }
+.resumo .ajuda, .resumo-gabinete .ajuda { color: var(--azul-claro); }
+.resumo .ajuda:hover { background: rgba(244, 243, 238, 0.12); }
+.aviso .ajuda { margin: -10px -10px -10px auto; flex: none; }
+
+dialog {
+  width: 100%;
+  max-width: 560px;
+  max-height: 85vh;
+  margin: auto auto 0;       /* no celular: encostada embaixo */
+  padding: 20px 16px 24px;
+  border: none;
+  border-radius: 20px 20px 0 0;
+  background: var(--cartao);
+  color: var(--marinho);
+  overflow-y: auto;
+}
+dialog::backdrop { background: rgba(31, 42, 68, 0.6); }
+.ajuda-cabecalho { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.ajuda-cabecalho h2 { margin: 6px 0 0; font-size: 1.25rem; }
+.ajuda-cabecalho .fechar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--branco);
+  color: var(--marinho);
+  cursor: pointer;
+}
+#ajuda-texto ul { padding-left: 20px; }
+#ajuda-texto li { margin-bottom: 6px; }
+#ajuda-texto a { color: var(--marinho); font-weight: 600; }
+dialog .botao { width: 100%; border: none; font: inherit; font-weight: 700; cursor: pointer; margin-top: 8px; }
+
+/* Lista de dúvidas comuns na tela inicial */
+.duvidas { margin-top: 20px; }
+.duvidas ul { list-style: none; margin: 8px 0 0; padding: 0; }
+.pergunta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 48px;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 1px solid #E2E1DA;
+  background: none;
+  color: var(--marinho);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.duvidas li:last-child .pergunta { border-bottom: none; }
+.pergunta svg { flex: none; width: 20px; height: 20px; }
 
 /* Telas maiores: um pouco mais de respiro */
 @media (min-width: 600px) {
   .resumo .total { font-size: 2.75rem; }
   .destaques { grid-template-columns: repeat(3, 1fr); }
   .destaque { flex-direction: column; }
+  dialog { margin: auto; border-radius: 20px; } /* no computador: centralizada */
 }

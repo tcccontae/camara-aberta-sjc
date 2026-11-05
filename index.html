@@ -19,6 +19,9 @@
   <div class="aviso" role="note">
     <i data-lucide="triangle-alert" aria-hidden="true"></i>
     <p>Protótipo independente com dados simulados. Não é um sistema oficial.</p>
+    <button class="ajuda" type="button" data-ajuda="dados-simulados" aria-label="O que são dados simulados?">
+      <i data-lucide="circle-help" aria-hidden="true"></i>
+    </button>
   </div>
 
   <header class="topo">
@@ -30,6 +33,18 @@
   <main id="conteudo" tabindex="-1">
     <p class="carregando">Carregando dados…</p>
   </main>
+
+  <!-- Janela de ajuda: preenchida e aberta pelo js/app.js -->
+  <dialog id="janela-ajuda" aria-labelledby="ajuda-titulo">
+    <div class="ajuda-cabecalho">
+      <h2 id="ajuda-titulo"></h2>
+      <button type="button" class="fechar" aria-label="Fechar explicação">
+        <i data-lucide="x" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div id="ajuda-texto"></div>
+    <button type="button" class="botao fechar">Entendi</button>
+  </dialog>
 
   <nav class="abas" aria-label="Seções">
     <a href="#/inicio" data-aba="inicio">
