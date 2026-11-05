@@ -17,8 +17,17 @@ export function moedaCurta(valor) {
   return moeda(valor);
 }
 
-// 0.7812 → "78%"
+// Versão bem curta, para eixos de gráfico: 7012345 → "R$ 7 mi"
+const compacto = new Intl.NumberFormat("pt-BR", {
+  style: "currency", currency: "BRL", notation: "compact", maximumFractionDigits: 1,
+});
+export function moedaEixo(valor) {
+  return compacto.format(valor);
+}
+
+// 0.7812 → "78%" · 0.003 → "<1%" (para não parecer que foi zero)
 export function porcentagem(fatia) {
+  if (fatia > 0 && fatia < 0.01) return "<1%";
   return `${Math.round(fatia * 100)}%`;
 }
 
@@ -28,4 +37,9 @@ const MESES = ["janeiro", "fevereiro", "março", "abril", "maio", "junho", "julh
 // "2025-12" → "dezembro"
 export function nomeMes(anoMes) {
   return MESES[Number(anoMes.slice(5, 7)) - 1];
+}
+
+// "2025-12" → "dez"
+export function mesCurto(anoMes) {
+  return nomeMes(anoMes).slice(0, 3);
 }
