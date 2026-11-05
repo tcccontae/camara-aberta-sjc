@@ -2,7 +2,9 @@
 import { totalGeral, mediaMensal, totalPorCategoria, totalPorMes, custoMedioGabinete } from "../dados.js";
 import { moedaCurta, porcentagem, nomeMes } from "../formatar.js";
 
-export function telaInicio(dados) {
+export const telaInicio = { html };
+
+function html(dados) {
   const ano = dados.meta.ano;
   const pessoal = totalPorCategoria(dados).find((c) => c.categoria.id === "pessoal");
   const mesMaisCaro = totalPorMes(dados).reduce((maior, m) => (m.total > maior.total ? m : maior));
