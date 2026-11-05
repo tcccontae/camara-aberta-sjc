@@ -1,0 +1,206 @@
+/* ===== Paleta e medidas (mude aqui e vale para o site todo) ===== */
+:root {
+  --marinho: #1F2A44;
+  --cinza: #8A8F98;        /* só ícones e bordas: contraste baixo para texto */
+  --cinza-texto: #555A63;  /* cinza mais escuro, legível em texto pequeno */
+  --branco: #F4F3EE;
+  --azul-claro: #A9C6E8;
+  --dourado: #E4B23B;
+  --cartao: #FFFFFF;
+
+  --raio: 14px;
+  --altura-abas: 64px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--branco);
+  color: var(--marinho);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.0625rem; /* 17px: confortável no celular */
+  line-height: 1.5;
+  padding-bottom: calc(var(--altura-abas) + 16px);
+}
+
+/* Link escondido que aparece ao navegar com Tab (acessibilidade) */
+.pular {
+  position: absolute;
+  left: -9999px;
+}
+.pular:focus {
+  left: 16px;
+  top: 8px;
+  z-index: 10;
+  background: var(--marinho);
+  color: var(--branco);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+
+/* Texto lido por leitores de tela, mas invisível na tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+:focus-visible {
+  outline: 3px solid var(--dourado);
+  outline-offset: 2px;
+}
+
+/* ===== Aviso fixo no topo ===== */
+.aviso {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: var(--dourado);
+  color: var(--marinho);
+  padding: 8px 16px;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.aviso p { margin: 0; }
+.aviso svg { flex: none; width: 20px; height: 20px; }
+
+.topo {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  background: var(--marinho);
+  color: var(--branco);
+  padding: 12px 16px;
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 20px 16px;
+}
+main:focus { outline: none; }
+
+.carregando, .erro { color: var(--cinza-texto); }
+.erro {
+  background: var(--cartao);
+  border-left: 4px solid var(--dourado);
+  padding: 12px 16px;
+  border-radius: 8px;
+}
+
+/* ===== Abas fixas embaixo ===== */
+.abas {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: var(--altura-abas);
+  display: flex;
+  background: var(--marinho);
+}
+.abas a {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  color: var(--azul-claro);
+  text-decoration: none;
+  font-size: 0.8125rem;
+}
+.abas a[aria-current="page"] {
+  color: var(--dourado);
+  font-weight: 700;
+  box-shadow: inset 0 3px 0 var(--dourado);
+}
+
+/* ===== Tela inicial ===== */
+.resumo {
+  background: var(--marinho);
+  color: var(--branco);
+  border-radius: var(--raio);
+  padding: 20px;
+}
+.resumo h1 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--azul-claro);
+}
+.resumo .total {
+  display: block;
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 4px 0;
+}
+.resumo .mensal { margin: 0; }
+
+.destaques {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  display: grid;
+  gap: 12px;
+}
+.destaque {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--cartao);
+  border-radius: var(--raio);
+  padding: 16px;
+  border: 1px solid #E2E1DA;
+}
+.destaque .icone {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--azul-claro);
+  color: var(--marinho);
+}
+.destaque strong {
+  display: block;
+  font-size: 1.25rem;
+}
+.destaque p { margin: 2px 0 0; color: var(--cinza-texto); }
+
+.botao {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: var(--dourado);
+  color: var(--marinho);
+  font-weight: 700;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: var(--raio);
+}
+
+.rodape-dados {
+  margin-top: 20px;
+  font-size: 0.875rem;
+  color: var(--cinza-texto);
+  text-align: center;
+}
+
+/* Telas maiores: um pouco mais de respiro */
+@media (min-width: 600px) {
+  .resumo .total { font-size: 2.75rem; }
+  .destaques { grid-template-columns: repeat(3, 1fr); }
+  .destaque { flex-direction: column; }
+}
