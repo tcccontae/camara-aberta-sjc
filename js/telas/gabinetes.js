@@ -44,7 +44,7 @@ function html(dados) {
     </div>
     <p id="contagem" class="apoio" aria-live="polite"></p>
 
-    <ol class="ranking">${itens}</ol>
+    <ol class="ranking" role="list">${itens}</ol>
     <p id="sem-resultado" class="erro" hidden>Nenhum gabinete encontrado com esse nome.</p>
   `;
 }

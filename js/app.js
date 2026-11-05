@@ -35,8 +35,22 @@ function mostrarTela(dados) {
     else a.removeAttribute("aria-current");
   });
 
+  // Título da aba do navegador muda com a tela (ajuda leitores de tela e o histórico).
+  const h1 = conteudo.querySelector("h1");
+  document.title = tela === telaInicio || !h1
+    ? "Câmara Aberta SJC"
+    : `${h1.textContent.trim()} · Câmara Aberta SJC`;
+
   window.lucide?.createIcons(); // troca os <i data-lucide> pelos desenhos SVG
   window.scrollTo(0, 0);
+}
+
+// Depois de trocar de tela, leva o foco ao título: o leitor de tela anuncia
+// "Gabinetes, título 1" e quem usa teclado continua a partir dali.
+function focarTitulo() {
+  const alvo = conteudo.querySelector("h1") || conteudo;
+  alvo.setAttribute("tabindex", "-1");
+  alvo.focus();
 }
 
 // ===== Janela de ajuda (botões "?") =====
@@ -63,7 +77,7 @@ async function iniciar() {
     mostrarTela(dados);
     window.addEventListener("hashchange", () => {
       mostrarTela(dados);
-      conteudo.focus(); // leva o foco do teclado para o novo conteúdo
+      focarTitulo();
     });
   } catch (erro) {
     conteudo.innerHTML = `

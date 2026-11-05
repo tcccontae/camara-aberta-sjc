@@ -34,7 +34,7 @@ export function listaCategorias(itens) {
         <div class="preenchimento" style="width: ${(fatia * 100).toFixed(1)}%"></div>
       </div>
     </li>`).join("");
-  return `<ul class="barras">${linhas}</ul>`;
+  return `<ul class="barras" role="list">${linhas}</ul>`;
 }
 
 // ===== Gráfico de barras por mês + destaque + tabela =====

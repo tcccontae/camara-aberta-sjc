@@ -9,7 +9,7 @@
   --cartao: #FFFFFF;
 
   --raio: 14px;
-  --altura-abas: 64px;
+  --altura-abas: 4rem; /* em rem: cresce junto quando a pessoa aumenta a letra */
 }
 
 * { box-sizing: border-box; }
@@ -49,15 +49,26 @@ body {
   white-space: nowrap;
 }
 
+/* Contorno de foco (teclado): marinho no fundo claro, dourado no fundo escuro.
+   Dourado no fundo claro teria contraste de só 1,96:1 (mínimo é 3:1). */
 :focus-visible {
-  outline: 3px solid var(--dourado);
+  outline: 3px solid var(--marinho);
   outline-offset: 2px;
 }
+.abas :focus-visible,
+.topo :focus-visible,
+.resumo :focus-visible {
+  outline-color: var(--dourado);
+}
+/* Títulos recebem foco pelo código ao trocar de tela; não precisam de contorno */
+[tabindex="-1"]:focus { outline: none; }
 
-/* ===== Aviso fixo no topo ===== */
+/* ===== Aviso no topo ===== */
+/* Só fica grudado no topo se a tela tiver altura suficiente. A medida em "em"
+   acompanha o tamanho de letra escolhido pela pessoa: com letra grande ou
+   celular deitado, o aviso rola junto, em vez de cobrir metade da tela. */
 .aviso {
-  position: sticky;
-  top: 0;
+  position: static;
   z-index: 5;
   display: flex;
   gap: 8px;
@@ -67,6 +78,9 @@ body {
   padding: 8px 16px;
   font-size: 0.875rem;
   font-weight: 600;
+}
+@media (min-height: 40em) {
+  .aviso { position: sticky; top: 0; }
 }
 .aviso p { margin: 0; }
 .aviso svg { flex: none; width: 20px; height: 20px; }
@@ -103,7 +117,7 @@ main:focus { outline: none; }
   bottom: 0;
   left: 0;
   right: 0;
-  height: var(--altura-abas);
+  min-height: var(--altura-abas);
   display: flex;
   background: var(--marinho);
 }
@@ -419,6 +433,17 @@ dialog .botao { width: 100%; border: none; font: inherit; font-weight: 700; curs
 }
 .duvidas li:last-child .pergunta { border-bottom: none; }
 .pergunta svg { flex: none; width: 20px; height: 20px; }
+
+/* ===== Modo de alto contraste (Windows) =====
+   Nesse modo o sistema troca todas as cores e apaga as cores de fundo; sem isto,
+   as barras sumiriam. Usamos cores do sistema (CanvasText, Highlight). */
+@media (forced-colors: active) {
+  .trilho { border: 1px solid CanvasText; }
+  .preenchimento { background: CanvasText; forced-color-adjust: none; }
+  .amostra { background: Highlight; forced-color-adjust: none; }
+  .abas a[aria-current="page"] { text-decoration: underline; }
+  .avatar, .icone, .icone-peq { border: 1px solid CanvasText; }
+}
 
 /* Telas maiores: um pouco mais de respiro */
 @media (min-width: 600px) {

@@ -16,13 +16,13 @@
   <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
   <!-- Aviso fixo exigido: aparece em todas as telas -->
-  <div class="aviso" role="note">
+  <section class="aviso" aria-label="Aviso">
     <i data-lucide="triangle-alert" aria-hidden="true"></i>
     <p>Protótipo independente com dados simulados. Não é um sistema oficial.</p>
     <button class="ajuda" type="button" data-ajuda="dados-simulados" aria-label="O que são dados simulados?">
       <i data-lucide="circle-help" aria-hidden="true"></i>
     </button>
-  </div>
+  </section>
 
   <header class="topo">
     <i data-lucide="landmark" aria-hidden="true"></i>
@@ -31,6 +31,10 @@
 
   <!-- O conteúdo de cada tela é colocado aqui pelo js/app.js -->
   <main id="conteudo" tabindex="-1">
+    <noscript>
+      <p class="erro">Este site precisa de JavaScript para mostrar os dados.
+      Ative o JavaScript nas configurações do navegador e recarregue a página.</p>
+    </noscript>
     <p class="carregando">Carregando dados…</p>
   </main>
 

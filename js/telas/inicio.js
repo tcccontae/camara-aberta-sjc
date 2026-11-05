@@ -26,7 +26,7 @@ function html(dados) {
     </section>
 
     <h2 class="sr-only">Destaques</h2>
-    <ul class="destaques">
+    <ul class="destaques" role="list">
       <li class="destaque">
         <span class="icone" aria-hidden="true"><i data-lucide="users"></i></span>
         <div>
@@ -56,7 +56,7 @@ function html(dados) {
 
     <section class="cartao duvidas" aria-labelledby="titulo-duvidas">
       <h2 id="titulo-duvidas">Dúvidas comuns</h2>
-      <ul>${duvidas}</ul>
+      <ul role="list">${duvidas}</ul>
     </section>
 
     <p class="rodape-dados">Fonte: dados simulados · atualizado em ${dados.meta.atualizadoEm.split("-").reverse().join("/")}</p>
