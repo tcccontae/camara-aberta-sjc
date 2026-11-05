@@ -3,32 +3,33 @@
 import { carregarDados } from "./dados.js";
 import { telaInicio } from "./telas/inicio.js";
 import { telaGraficos } from "./telas/graficos.js";
+import { telaGabinetes } from "./telas/gabinetes.js";
+import { telaDetalhe } from "./telas/detalhe.js";
 
 const conteudo = document.getElementById("conteudo");
 
-function emConstrucao(titulo) {
-  return { html: () => `<h1>${titulo}</h1><p class="carregando">Em construção. Volte em breve!</p>` };
-}
-
 // Cada tela é um objeto com:
-//   html(dados)      → devolve o HTML da tela
-//   aoMostrar(dados) → (opcional) roda depois que o HTML está na página,
-//                      por exemplo para desenhar gráficos
+//   html(dados, parametro)      → devolve o HTML da tela
+//   aoMostrar(dados, parametro) → (opcional) roda depois que o HTML está na
+//                                 página, por exemplo para desenhar gráficos
+//   aba                         → (opcional) qual aba fica acesa
 const rotas = {
   inicio: telaInicio,
   graficos: telaGraficos,
-  gabinetes: emConstrucao("Gabinetes"),
+  gabinetes: telaGabinetes,
+  gabinete: telaDetalhe, // #/gabinete/gab-a → parametro = "gab-a"
 };
 
 function mostrarTela(dados) {
-  const nome = location.hash.replace("#/", "") || "inicio";
+  const [nome, parametro] = location.hash.replace(/^#\/?/, "").split("/");
   const tela = rotas[nome] || rotas.inicio;
-  conteudo.innerHTML = tela.html(dados);
-  tela.aoMostrar?.(dados);
+  conteudo.innerHTML = tela.html(dados, parametro);
+  tela.aoMostrar?.(dados, parametro);
 
   // Destaca a aba atual (leitores de tela anunciam "página atual").
+  const abaAtual = tela.aba || (rotas[nome] ? nome : "inicio");
   document.querySelectorAll(".abas a").forEach((a) => {
-    if (a.dataset.aba === nome) a.setAttribute("aria-current", "page");
+    if (a.dataset.aba === abaAtual) a.setAttribute("aria-current", "page");
     else a.removeAttribute("aria-current");
   });
 

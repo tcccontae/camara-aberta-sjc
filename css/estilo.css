@@ -257,6 +257,95 @@ thead th:last-child { text-align: right; }
 th[scope="row"] { font-weight: 400; text-transform: capitalize; }
 tr.mais-caro { background: #FBF1D6; font-weight: 700; }
 
+/* ===== Avatar genérico ===== */
+.avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--azul-claro);
+  color: var(--marinho);
+  font-weight: 800;
+}
+.avatar-grande {
+  width: 64px;
+  height: 64px;
+  font-size: 1.5rem;
+  background: var(--dourado);
+}
+
+/* ===== Ranking e busca ===== */
+.busca label { display: block; font-weight: 600; margin-bottom: 6px; }
+.campo { position: relative; }
+.campo svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: var(--cinza-texto);
+}
+.campo input {
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 12px 10px 42px;
+  font: inherit;            /* 17px: evita o zoom automático do iPhone */
+  color: var(--marinho);
+  background: var(--cartao);
+  border: 2px solid var(--cinza);
+  border-radius: var(--raio);
+}
+.campo input:focus { border-color: var(--marinho); }
+
+.ranking { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.item-gabinete {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 64px;
+  padding: 10px 12px;
+  background: var(--cartao);
+  border: 1px solid #E2E1DA;
+  border-radius: var(--raio);
+  color: var(--marinho);
+  text-decoration: none;
+}
+.item-gabinete:hover { border-color: var(--marinho); }
+.posicao { width: 2.2em; font-weight: 700; color: var(--cinza-texto); text-align: right; }
+.item-meio { flex: 1; min-width: 0; display: grid; gap: 6px; }
+.item-nome { font-weight: 600; }
+.item-meio .trilho { display: block; height: 6px; }
+.item-meio .preenchimento { display: block; }
+.item-valor { font-weight: 700; white-space: nowrap; }
+
+/* ===== Detalhe do gabinete ===== */
+.voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin-bottom: 8px;
+  color: var(--marinho);
+  font-weight: 600;
+}
+.resumo-gabinete { margin-bottom: 16px; }
+.identidade { display: flex; align-items: center; gap: 14px; }
+.resumo-gabinete h1 { font-size: 1.5rem; font-weight: 800; color: var(--branco); }
+.identidade p { margin: 0; color: var(--azul-claro); }
+.numeros { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 12px; }
+.numeros dt { font-size: 0.875rem; color: var(--azul-claro); }
+.numeros dd {
+  margin: 0;
+  font-size: clamp(1.125rem, 5vw, 1.375rem); /* encolhe em telas estreitas */
+  font-weight: 800;
+  white-space: nowrap;
+}
+.comparacao { display: flex; gap: 8px; align-items: center; margin: 0; }
+.comparacao svg { flex: none; color: var(--dourado); }
+
 /* Telas maiores: um pouco mais de respiro */
 @media (min-width: 600px) {
   .resumo .total { font-size: 2.75rem; }
