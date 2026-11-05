@@ -1,7 +1,7 @@
 // Tela de gabinetes: ranking do mais econômico ao mais caro, com busca.
 import { rankingGabinetes, custoMedioGabinete } from "../dados.js";
 import { moedaCurta, escapar, normalizar } from "../formatar.js";
-import { avatar } from "../componentes.js";
+import { avatar, ajuda } from "../componentes.js";
 
 export const telaGabinetes = { html, aoMostrar };
 
@@ -27,9 +27,10 @@ function html(dados) {
     </li>`).join("");
 
   return `
-    <h1>Gabinetes</h1>
+    <h1>Gabinetes ${ajuda("gabinete", "O que é um gabinete?")}</h1>
     <p class="apoio">
       Do mais econômico ao mais caro em ${dados.meta.ano}.
+      ${ajuda("ranking", "Gastar menos é sempre melhor?")}
       Em média, um gabinete custou <b>${moedaCurta(custoMedioGabinete(dados))}</b>.
     </p>
 

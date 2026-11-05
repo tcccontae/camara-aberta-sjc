@@ -1,7 +1,7 @@
 // Detalhe de um gabinete: #/gabinete/gab-a
 import { gabinetePorId, rankingGabinetes, custoMedioGabinete, totalPorCategoria, totalPorMes } from "../dados.js";
 import { moedaCurta, porcentagem, escapar } from "../formatar.js";
-import { avatar, listaCategorias, blocoMeses, desenharMeses } from "../componentes.js";
+import { avatar, listaCategorias, blocoMeses, desenharMeses, ajuda } from "../componentes.js";
 
 export const telaDetalhe = { html, aoMostrar, aba: "gabinetes" };
 
@@ -38,7 +38,8 @@ function html(dados, id) {
         ${avatar(gabinete.nome, true)}
         <div>
           <h1 id="titulo-gabinete">${nome}</h1>
-          <p>${posicao}º mais econômico de ${ranking.length}</p>
+          <p>${posicao}º mais econômico de ${ranking.length}
+            ${ajuda("ranking", "Gastar menos é sempre melhor?")}</p>
         </div>
       </div>
       <dl class="numeros">
@@ -47,7 +48,8 @@ function html(dados, id) {
       </dl>
       <p class="comparacao">
         <i data-lucide="${comparacao.icone}" aria-hidden="true"></i>
-        ${comparacao.texto} (${moedaCurta(media)}).
+        <span>${comparacao.texto} (${moedaCurta(media)}).
+        ${ajuda("media", "Como a média é calculada?")}</span>
       </p>
     </section>
 
